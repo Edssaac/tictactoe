@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo da Velha</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="assets/x.png">
+
+    <style type="text/css">
+        body {
+            background-color: #f9ccdb;
+        }
+
+        #head {
+            font-family: 'Roboto Mono', monospace;
+
+            margin: auto;
+
+            margin-top: 40px;
+
+            width: 252px;
+            height: 80px;
+        }
+
+        .espaco {
+            width: 80px;
+            height: 65px; 
+            
+            border: 2px solid #000;
+
+            float: left;
+
+            text-align: center;
+            padding-top: 15px;
+        }
+
+        .tabuleiro {
+            margin: auto;
+
+            width: 252px;
+            height: 252px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <div id="head">
+        <p style="float: left; margin-right: 10px;">Jogador:</p>
+        <img src="" border="0" height="50">
+    </div>
+    <div class="tabuleiro">
+        <div id="a1" class="espaco" jogada=""></div>
+        <div id="a2" class="espaco" jogada=""></div>
+        <div id="a3" class="espaco" jogada=""></div>
+
+        <div id="b1" class="espaco" jogada=""></div>
+        <div id="b2" class="espaco" jogada=""></div>
+        <div id="b3" class="espaco" jogada=""></div>
+
+        <div id="c1" class="espaco" jogada=""></div>
+        <div id="c2" class="espaco" jogada=""></div>
+        <div id="c3" class="espaco" jogada=""></div>
+    </div>
+
+    <script type="text/javascript" src="game.js"></script>
+
+</body>
+
+</html>
