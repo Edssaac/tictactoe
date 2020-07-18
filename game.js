@@ -78,6 +78,11 @@ async function verificarVencedor() {
         await sleep(40);
         alert("O vencedor foi: " + vencedor);
     }
+
+    if ( (a1 != "") && (a2 != "") && (a2 != "") && (b1 != "") && (b2 != "") && (b3 != "") && (c1 != "") && (c2 != "") && (c3 != "") && vencedor == "") {
+        await sleep(20)
+        alert("Empate!")
+    }
 }
 
 function sleep(ms) {
