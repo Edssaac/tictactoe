@@ -13,10 +13,10 @@ function atualizaMostrador() {
 
     if (playTime == player1) {
         var player = document.querySelectorAll("div#head img")[0];
-        player.setAttribute("src", "assets/x.png")
+        player.setAttribute("src", "x.png")
     } else {
         var player = document.querySelectorAll("div#head img")[0];
-        player.setAttribute("src", "assets/bolinha.svg")
+        player.setAttribute("src", "bolinha.svg")
     }
 } 
 
@@ -32,11 +32,11 @@ function inicializarEspacos() {
             if (this.getElementsByTagName("img").length == 0) {
                 
                 if (playTime == player1) {
-                    this.innerHTML = "<img src='assets/x.png' height='55'>";
+                    this.innerHTML = "<img src='x.png' height='55'>";
                     this.setAttribute("jogada", player1);
                     playTime = player2;
                 } else {
-                    this.innerHTML = "<img src='assets/bolinha.svg' height='55'>";
+                    this.innerHTML = "<img src='bolinha.svg' height='55'>";
                     this.setAttribute("jogada", player2);
                     playTime = player1;
                 }
@@ -93,7 +93,7 @@ function restart() {
     playTime = player1;
 
     var player = document.querySelectorAll("div#head img")[0];
-    player.setAttribute("src", "assets/x.png");
+    player.setAttribute("src", "x.png");
 
     
 
