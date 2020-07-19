@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo da Velha</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="x.png">
+    <link rel="shortcut icon" href="assets/x.png">
 
     <style type="text/css">
         body {
@@ -26,8 +26,8 @@
 
         .espaco {
             width: 80px;
-            height: 65px; 
-            
+            height: 65px;
+
             border: 2px solid #000;
 
             float: left;
@@ -43,6 +43,26 @@
             height: 252px;
         }
 
+        div.botao {
+            height: 8em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .botao button {
+            border-radius: 8px;
+            padding: 15px 32px;
+
+            background-color: #f9ccdb;
+            border-color: #000;
+
+            font-family: 'Roboto Mono', monospace;
+        }
+        .botao button:hover {
+            border-color: grey;
+        }
+ 
     </style>
 
 </head>
@@ -64,6 +84,9 @@
         <div id="c1" class="espaco" jogada=""></div>
         <div id="c2" class="espaco" jogada=""></div>
         <div id="c3" class="espaco" jogada=""></div>
+    </div>
+    <div class="botao">
+        <button onclick="restart()">Tentar Novamente</button>
     </div>
 
     <script type="text/javascript" src="game.js"></script>
