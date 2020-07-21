@@ -1,132 +1,153 @@
-<!DOCTYPE html>
-<html lang="pt_br">
+const player1 = "X";
+const player2 = "O";
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogo da Velha</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
-    <link rel="shortcut icon" href="x.png">
+var playTime = player1;
+var gameOver = false;
 
-    <style type="text/css">
-        body {
-            background-color: #f9ccdb;
+var vencedor ="";
+var placarE = 0;
+var placarX = 0;
+var placarY = 0;
+
+
+atualizaMostrador();
+inicializarEspacos();
+
+function atualizaMostrador() {
+    if (gameOver) {return;}
+
+    if (playTime == player1) {
+        var player = document.querySelectorAll("div#head img")[0];
+        player.setAttribute("src", "x.png")
+    } else {
+        var player = document.querySelectorAll("div#head img")[0];
+        player.setAttribute("src", "bolinha.svg")
+    }
+} 
+
+function pontuacao() {
+    var X = document.getElementById("X");
+    X.innerHTML = ("X:" + placarX)
+
+    var Y = document.getElementById("Y");
+    Y.innerHTML = ("O:" + placarY)
+
+    var E = document.getElementById("E");
+    E.innerHTML = ("E:" + placarE)
+} 
+
+function inicializarEspacos() {
+
+    var espacos = document.getElementsByClassName("espaco")
+
+    for (var i = 0; i < espacos.length; i++) {
+        espacos[i].addEventListener("click", function() {
+
+            if (gameOver) {return;}
+
+            if (this.getElementsByTagName("img").length == 0) {
+                
+                if (playTime == player1) {
+                    this.innerHTML = "<img src='x.png' height='55'>";
+                    this.setAttribute("jogada", player1);
+                    playTime = player2;
+                } else {
+                    this.innerHTML = "<img src='bolinha.svg' height='55'>";
+                    this.setAttribute("jogada", player2);
+                    playTime = player1;
+                }
+                atualizaMostrador();
+                verificarVencedor();
+            }
+
         }
+        );
+    }
+    
+}
 
-        #head {
-            font-family: 'Roboto Mono', monospace;
+async function verificarVencedor() {
 
-            margin: auto;
+    var a1 = document.getElementById("a1").getAttribute("jogada");
+    var a2 = document.getElementById("a2").getAttribute("jogada");
+    var a3 = document.getElementById("a3").getAttribute("jogada");
 
-            margin-top: 40px;
+    var b1 = document.getElementById("b1").getAttribute("jogada");
+    var b2 = document.getElementById("b2").getAttribute("jogada");
+    var b3 = document.getElementById("b3").getAttribute("jogada");
 
-            width: 340px;
-            height: 150px;
+    var c1 = document.getElementById("c1").getAttribute("jogada");
+    var c2 = document.getElementById("c2").getAttribute("jogada");
+    var c3 = document.getElementById("c3").getAttribute("jogada");
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    vencedor = "";
+
+    if (( (a1 == b1 && a1 == c1) || (a1 == a2 && a1 == a3) || (a1 == b2 && a1 == c3) ) && a1 != "" ) {
+        vencedor = a1;
+
+    } else if (( (b1 == b2 && b1 == b3) || (b2 == a2 && b2 == c2) || (b2 == a3 && b2 == c1) ) && b2 != "" ) {
+        vencedor = b2;
+
+    } else if (b2 == "X") if (( (c1 == c2 && c1 == c3) || (c3 == b3 && c3 == a3) ) && c3 != "") {
+        vencedor = c3;
+    }
+
+    if (vencedor != "") {
+        gameOver = true;
+
+        await sleep(40);
+        alert("O vencedor foi: " + vencedor);
+    }
+
+    if ( (a1 != "") && (a2 != "") && (a2 != "") && (b1 != "") && (b2 != "") && (b3 != "") && (c1 != "") && (c2 != "") && (c3 != "") && vencedor == "") {
+
+        placarE += 1;
+        gameOver = true;
+
+        await sleep(20);
+        alert("Empate!");
+    }
+
+    if (vencedor == "X") {
+        placarX += 1;
+    } else if (vencedor == "O") {
+        placarY += 1;
+    }
+
+    pontuacao();
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function restart() {
+    gameOver = false;
+    playTime = player1;
+
+    var player = document.querySelectorAll("div#head img")[0];
+    player.setAttribute("src", "x.png");
+
+    var reset = document.getElementsByClassName("espaco");
+    for (var i = 0; i < reset.length; i++) {
+        // console.log(reset[i]);
+        
+        if (reset[i].getElementsByTagName("img").length != 0) {
+            // console.log("aa")
+            reset[i].innerHTML = "<img src=''>";
+            reset[i].innerHTML = "<a>"
+            reset[i].setAttribute("jogada", "");
         }
+    }
 
-        div.placar {
-            display: table;
-            border: 2px solid black;
-            border-radius: 8px;
-            background-color: #d6efe8;
-            margin-right: 10px;
+    // console.log(a1);
 
-            margin: auto;
+    // var aba = document.getElementsByClassName("espaco");
+    // console.log(aba[1]);
+    // aba[1].setAttribute('jogada', '');
+    // aba[2].setAttribute('jogada', '');
+    // console.log(aba[1]);
 
-            height: 70px;
-        }
-        #head .placar p {
-            text-align: center;
-            margin-top: 0;
-        }
-        h9 {
-            /* background-color: #f0ebed; */
-            margin: 10px;
-        }
-
-        .espaco {
-            width: 80px;
-            height: 65px;
-
-            border: 2px solid #000;
-
-            float: left;
-
-            text-align: center;
-            padding-top: 15px;
-        }
-
-        .tabuleiro {
-            margin: auto;
-
-            width: 252px;
-            height: 252px;
-        }
-
-        div.botao {
-            height: 8em;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .botao button {
-            border-radius: 8px;
-            padding: 15px 32px;
-
-            background-color: #f9ccdb;
-            border: 0;
-            border: #000 solid 2px;
-
-            font-family: 'Roboto Mono', monospace;
-            transition: 250ms;
-        }
-        .botao button:active {
-            background-color: whitesmoke;
-        }
-
-    </style>
-
-</head>
-
-<body>
-
-    <div id="head" class="top">
-        <p style="float: left; margin-right: 8px; margin-left: 10px;">Jogador:</p>
-        <img src="" border="0" height="50">
-
-        <div class="placar">
-            <p>Pontos</p>
-            <h9 id="X">X:0</h9>
-            <h9 id="Y">O:0</h9>
-            <h9 id="E">E:0</h9>
-        </div>
-
-    </div>
-
-    <div class="tabuleiro">
-        <div id="a1" class="espaco" jogada=""></div>
-        <div id="a2" class="espaco" jogada=""></div>
-        <div id="a3" class="espaco" jogada=""></div>
-
-        <div id="b1" class="espaco" jogada=""></div>
-        <div id="b2" class="espaco" jogada=""></div>
-        <div id="b3" class="espaco" jogada=""></div>
-
-        <div id="c1" class="espaco" jogada=""></div>
-        <div id="c2" class="espaco" jogada=""></div>
-        <div id="c3" class="espaco" jogada=""></div>
-    </div>
-
-    <div class="botao">
-        <button onclick="restart()">Tentar Novamente</button>
-    </div>
-
-    <script type="text/javascript" src="game.js"></script>
-
-</body>
-
-</html>
+    // console.log(a1);
+    // console.log(reset[0])
+}
