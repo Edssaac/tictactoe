@@ -43,9 +43,11 @@ function inicializarEspacos() {
                 atualizaMostrador();
                 verificarVencedor();
             }
+
         }
         );
     }
+    
 }
 
 async function verificarVencedor() {
@@ -71,7 +73,7 @@ async function verificarVencedor() {
     } else if (( (c1 == c2 && c1 == c3) || (c3 == b3 && c3 == a3) ) && c3 != "") {
         vencedor = c3;
     }
-
+    // console.log(a1)
     if (vencedor != "") {
         gameOver = true;
 
@@ -80,9 +82,12 @@ async function verificarVencedor() {
     }
 
     if ( (a1 != "") && (a2 != "") && (a2 != "") && (b1 != "") && (b2 != "") && (b3 != "") && (c1 != "") && (c2 != "") && (c3 != "") && vencedor == "") {
+        gameOver = true;
+
         await sleep(20)
         alert("Empate!")
     }
+
 }
 
 function sleep(ms) {
@@ -90,20 +95,32 @@ function sleep(ms) {
 }
 
 function restart() {
+    gameOver = false;
     playTime = player1;
 
     var player = document.querySelectorAll("div#head img")[0];
     player.setAttribute("src", "x.png");
 
+    var reset = document.getElementsByClassName("espaco");
+    for (var i = 0; i < reset.length; i++) {
+        // console.log(reset[i]);
+        
+        if (reset[i].getElementsByTagName("img").length != 0) {
+            // console.log("aa")
+            reset[i].innerHTML = "<img src=''>";
+            reset[i].innerHTML = "<a>"
+            reset[i].setAttribute("jogada", "");
+        }
+    }
     
+    // console.log(a1);
 
+    // var aba = document.getElementsByClassName("espaco");
+    // console.log(aba[1]);
+    // aba[1].setAttribute('jogada', '');
+    // aba[2].setAttribute('jogada', '');
+    // console.log(aba[1]);
 
-
-
-
-    
-
-
-
-    
+    // console.log(a1);
+    // console.log(reset[0])
 }
