@@ -4,6 +4,11 @@ const player2 = "O";
 var playTime = player1;
 var gameOver = false;
 
+var vencedor ="";
+var placarE = 0;
+var placarX = 0;
+var placarY = 0;
+
 
 atualizaMostrador();
 inicializarEspacos();
@@ -18,6 +23,17 @@ function atualizaMostrador() {
         var player = document.querySelectorAll("div#head img")[0];
         player.setAttribute("src", "bolinha.svg")
     }
+} 
+
+function pontuacao() {
+    var X = document.getElementById("X");
+    X.innerHTML = ("X:" + placarX)
+
+    var Y = document.getElementById("Y");
+    Y.innerHTML = ("O:" + placarY)
+
+    var E = document.getElementById("E");
+    E.innerHTML = ("E:" + placarE)
 } 
 
 function inicializarEspacos() {
@@ -64,16 +80,18 @@ async function verificarVencedor() {
     var c2 = document.getElementById("c2").getAttribute("jogada");
     var c3 = document.getElementById("c3").getAttribute("jogada");
 
-    var vencedor ="";
+    vencedor = "";
 
     if (( (a1 == b1 && a1 == c1) || (a1 == a2 && a1 == a3) || (a1 == b2 && a1 == c3) ) && a1 != "" ) {
         vencedor = a1;
+
     } else if (( (b1 == b2 && b1 == b3) || (b2 == a2 && b2 == c2) || (b2 == a3 && b2 == c1) ) && b2 != "" ) {
         vencedor = b2;
-    } else if (( (c1 == c2 && c1 == c3) || (c3 == b3 && c3 == a3) ) && c3 != "") {
+
+    } else if (b2 == "X") if (( (c1 == c2 && c1 == c3) || (c3 == b3 && c3 == a3) ) && c3 != "") {
         vencedor = c3;
     }
-    // console.log(a1)
+
     if (vencedor != "") {
         gameOver = true;
 
@@ -82,12 +100,21 @@ async function verificarVencedor() {
     }
 
     if ( (a1 != "") && (a2 != "") && (a2 != "") && (b1 != "") && (b2 != "") && (b3 != "") && (c1 != "") && (c2 != "") && (c3 != "") && vencedor == "") {
+
+        placarE += 1;
         gameOver = true;
 
-        await sleep(20)
-        alert("Empate!")
+        await sleep(20);
+        alert("Empate!");
     }
 
+    if (vencedor == "X") {
+        placarX += 1;
+    } else if (vencedor == "O") {
+        placarY += 1;
+    }
+
+    pontuacao();
 }
 
 function sleep(ms) {
@@ -112,7 +139,7 @@ function restart() {
             reset[i].setAttribute("jogada", "");
         }
     }
-    
+
     // console.log(a1);
 
     // var aba = document.getElementsByClassName("espaco");
