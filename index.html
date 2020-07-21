@@ -20,8 +20,32 @@
 
             margin-top: 40px;
 
-            width: 252px;
-            height: 80px;
+            width: 340px;
+            height: 150px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        div.placar {
+            display: table;
+            border: 2px solid black;
+            border-radius: 8px;
+            background-color: #d6efe8;
+            margin-right: 10px;
+
+            margin: auto;
+
+            height: 70px;
+        }
+        #head .placar p {
+            text-align: center;
+            margin-top: 0;
+        }
+        h9 {
+            /* background-color: #f0ebed; */
+            margin: 10px;
         }
 
         .espaco {
@@ -49,7 +73,6 @@
             align-items: center;
             justify-content: center;
         }
-
         .botao button {
             border-radius: 8px;
             padding: 15px 32px;
@@ -60,21 +83,30 @@
 
             font-family: 'Roboto Mono', monospace;
             transition: 250ms;
-
         }
         .botao button:active {
             background-color: whitesmoke;
         }
- 
+
     </style>
 
 </head>
 
 <body>
-    <div id="head">
-        <p style="float: left; margin-right: 10px;">Jogador:</p>
+
+    <div id="head" class="top">
+        <p style="float: left; margin-right: 8px; margin-left: 10px;">Jogador:</p>
         <img src="" border="0" height="50">
+
+        <div class="placar">
+            <p>Pontos</p>
+            <h9 id="X">X:0</h9>
+            <h9 id="Y">O:0</h9>
+            <h9 id="E">E:0</h9>
+        </div>
+
     </div>
+
     <div class="tabuleiro">
         <div id="a1" class="espaco" jogada=""></div>
         <div id="a2" class="espaco" jogada=""></div>
@@ -88,6 +120,7 @@
         <div id="c2" class="espaco" jogada=""></div>
         <div id="c3" class="espaco" jogada=""></div>
     </div>
+
     <div class="botao">
         <button onclick="restart()">Tentar Novamente</button>
     </div>
