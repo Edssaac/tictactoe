@@ -88,7 +88,7 @@ async function verificarVencedor() {
     } else if (( (b1 == b2 && b1 == b3) || (b2 == a2 && b2 == c2) || (b2 == a3 && b2 == c1) ) && b2 != "" ) {
         vencedor = b2;
 
-    } else if (b2 == "X") if (( (c1 == c2 && c1 == c3) || (c3 == b3 && c3 == a3) ) && c3 != "") {
+    } else if (( (c1 == c2 && c1 == c3) || (c3 == b3 && c3 == a3) ) && c3 != "") {
         vencedor = c3;
     }
 
@@ -99,7 +99,7 @@ async function verificarVencedor() {
         alert("O vencedor foi: " + vencedor);
     }
 
-    if ( (a1 != "") && (a2 != "") && (a3 != "") && (b1 != "") && (b2 != "") && (b3 != "") && (c1 != "") && (c2 != "") && (c3 != "") && vencedor == "") {
+    if ( (a1 != "") && (a2 != "") && (a3 != "") && (b1 != "") && (b2 != "") && (b3 != "") && (c1 != "") && (c2 != "") && (c3 != "") && (vencedor == "") ) {
 
         placarE += 1;
         gameOver = true;
